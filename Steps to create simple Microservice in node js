@@ -1,0 +1,30 @@
+Steps to create simple Microservice in node
+1. Install node js
+2. open editor and launch terminal
+3. Create some folder
+4. on terminal type npm init -y
+5 Create Uservice.js and add below code in editor
+
+const express = require('express');
+const app = express()
+app.use(express.json())
+
+const users = [{id: 1, name : "Krishna"},{id: 2, name : "Narayan"}]
+
+app.get('/users',(req,res)=>{
+    res.send(users)
+})
+app.get('/users/:id',(req,res)=>{
+    const user = users.find(u=> u.id === parseInt(req.params.id))
+    if(!user) return res.status(404).send("User not exists or something went wrong!!")
+    res.send(user)
+})
+
+app.listen(3001, () =>{
+    console.log("User Service is running Successfully")
+})
+
+6. test the service by typing command on node UserService.js
+will get output as User Service is running Successfully
+then launch browser and type http://localhost:3001/users to fetch users data 
+7. 
